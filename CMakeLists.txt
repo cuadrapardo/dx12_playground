@@ -3,6 +3,8 @@
 #
 cmake_minimum_required (VERSION 3.8)
 
+include(FetchContent)
+
 # Enable Hot Reload for MSVC compilers if supported.
 if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
@@ -10,6 +12,16 @@ if (POLICY CMP0141)
 endif()
 
 project ("dx12_playground")
+
+# Fetch the DirectX-Headers repository
+FetchContent_Declare(
+    DirectX-Headers
+    GIT_REPOSITORY https://github.com/microsoft/DirectX-Headers
+    GIT_TAG v1.614.1 
+)
+
+# Make the repository available in the build
+FetchContent_MakeAvailable(DirectX-Headers)
 
 # Include sub-projects.
 add_subdirectory ("dx12_playground")
